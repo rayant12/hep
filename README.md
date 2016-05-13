@@ -3,7 +3,7 @@
 Codes for analyzing samples produced for newcoming students
 
 ```
-git clone git@github.com:syuvivida/ExamplesForStudents.git ExamplesForStudents
+git clone git@github.com:syuvivida/ExamplesForStudents.git 
 cd ExamplesForStudents
 ```
 
