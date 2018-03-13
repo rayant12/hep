@@ -15,5 +15,5 @@ A header file "myClass.h" and a .C file "myClass.C" will be created. To run myCl
 root -l 
 .L myClass.C
 myClass t
-t.Loop
+t.Loop()
 ```
