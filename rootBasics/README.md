@@ -1,6 +1,6 @@
 # ExamplesForStudents/rootbasics
 
-## If you want to create a class to read your own TTree, supposely if your TTree name is "EventData"
+# If you want to create a class to read your own TTree, supposely if your TTree name is "EventData"
 ```
 root -l eventdata.root
 ```
