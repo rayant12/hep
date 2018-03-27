@@ -39,7 +39,6 @@ void xAna_hh(std::string inputFile){
     int nFATJet         = data.GetInt("FATnJet");
     const int nJets=nFATJet;
     TClonesArray* fatjetP4 = (TClonesArray*) data.GetPtrTObject("FATjetP4");
-    Float_t*  fatjetCISVV2 = data.GetPtrFloat("FATjetCISVV2");
     Float_t*  fatjetSDmass = data.GetPtrFloat("FATjetSDmass");
     Int_t*   nSubSoftDropJet = data.GetPtrInt("FATnSubSDJet");
     vector<float>   *subjetSDCSV =  data.GetPtrVectorFloat("FATsubjetSDCSV", nFATJet);
@@ -49,25 +48,6 @@ void xAna_hh(std::string inputFile){
     vector<float>   *subjetSDE   =  data.GetPtrVectorFloat("FATsubjetSDE", nFATJet);
     vector<bool>    &passFatJetLooseID = *((vector<bool>*) data.GetPtr("FATjetPassIDLoose"));
     
-    int nFatBTag=0;
-    for(int ij=0; ij<nJets; ij++)
-      {
-    	
-     	TLorentzVector* thisJet = (TLorentzVector*)fatjetP4->At(ij);
-    	if(thisJet->Pt()<30)continue;
-    	if(fabs(thisJet->Eta())>2.5)continue;
-    	if(fatjetSDmass[ij]<95 || fatjetSDmass[ij]>145)continue;
-	if(!passFatJetLooseID[ij])continue;
-	
-    	if(fatjetCISVV2[ij] < 0.605)continue;
-    	if(fatjetCISVV2[ij] > 1)continue;
-
-    	nFatBTag++;
-
-      }
-    
-    if(nFatBTag>=2)nPass[1]++;
-
 
     int nSubBTag[2]={0}; // check only the leading two fat jets 
     int nGoodFatJet=0;
@@ -92,14 +72,14 @@ void xAna_hh(std::string inputFile){
       }
   
     // if each fat jet has at least one subjet btag
-    if(nSubBTag[0]>0 && nSubBTag[1]>0)nPass[2]++;
+    if(nSubBTag[0]>0 && nSubBTag[1]>0)nPass[1]++;
 
     // if one of the fat jets has at least two subjet btags
     if((nSubBTag[0]>1 && nSubBTag[1]>0) || 
-       (nSubBTag[0]>0 && nSubBTag[1]>1))nPass[3]++;
+       (nSubBTag[0]>0 && nSubBTag[1]>1))nPass[2]++;
 
     // if both fat jets have at least two subjet btags
-    if(nSubBTag[0]>1 && nSubBTag[1]>1) nPass[4]++;
+    if(nSubBTag[0]>1 && nSubBTag[1]>1) nPass[3]++;
         
 
   } // end of loop over entries
